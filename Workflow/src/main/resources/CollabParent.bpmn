@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="CollabParentProcess" name="Collab Parent Process">
+    <startEvent id="startParent" name="Start Parent"></startEvent>
+    <serviceTask id="CreateWorkItem" name="Create Work Item"></serviceTask>
+    <sequenceFlow id="fromStartToCreateWorkItem" name="" sourceRef="startParent" targetRef="CreateWorkItem"></sequenceFlow>
+    <exclusiveGateway id="checkEligiblity" name="Check Eligiblity"></exclusiveGateway>
+    <sequenceFlow id="fromCreateWorkItemToCheckEligibility" name="" sourceRef="CreateWorkItem" targetRef="checkEligiblity"></sequenceFlow>
+    <serviceTask id="HandleTechnicalException" name="Handle Technical Exception"></serviceTask>
+    <sequenceFlow id="fromCheckEligibilityToHandleException" name="" sourceRef="checkEligiblity" targetRef="HandleTechnicalException"></sequenceFlow>
+    <parallelGateway id="WorkItemPreProcess" name="Work Item Pre Process"></parallelGateway>
+    <sequenceFlow id="fromCheckEligibilityToPreProcess" name="" sourceRef="checkEligiblity" targetRef="WorkItemPreProcess"></sequenceFlow>
+    <userTask id="WorkItem" name="Work Item"></userTask>
+    <sequenceFlow id="fromPreProcessToWorkItem" name="" sourceRef="WorkItemPreProcess" targetRef="WorkItem"></sequenceFlow>
+    <intermediateCatchEvent id="MailToStakeHolders" name="Mail To Take Holders">
+      <messageEventDefinition></messageEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="fromPreProcessToMailStakeHolders" name="" sourceRef="WorkItemPreProcess" targetRef="MailToStakeHolders"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="fromWorkItemToEnd" name="" sourceRef="WorkItem" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="fromHandleExceptionToEnd" name="" sourceRef="HandleTechnicalException" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CollabParentProcess">
+    <bpmndi:BPMNPlane bpmnElement="CollabParentProcess" id="BPMNPlane_CollabParentProcess">
+      <bpmndi:BPMNShape bpmnElement="startParent" id="BPMNShape_startParent">
+        <omgdc:Bounds height="35" width="35" x="50" y="180"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CreateWorkItem" id="BPMNShape_CreateWorkItem">
+        <omgdc:Bounds height="55" width="105" x="160" y="170"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="checkEligiblity" id="BPMNShape_checkEligiblity">
+        <omgdc:Bounds height="40" width="40" x="350" y="177"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="HandleTechnicalException" id="BPMNShape_HandleTechnicalException">
+        <omgdc:Bounds height="55" width="105" x="480" y="60"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="WorkItemPreProcess" id="BPMNShape_WorkItemPreProcess">
+        <omgdc:Bounds height="40" width="40" x="520" y="177"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="WorkItem" id="BPMNShape_WorkItem">
+        <omgdc:Bounds height="55" width="105" x="640" y="170"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="MailToStakeHolders" id="BPMNShape_MailToStakeHolders">
+        <omgdc:Bounds height="35" width="35" x="523" y="300"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35" width="35" x="890" y="180"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="fromStartToCreateWorkItem" id="BPMNEdge_fromStartToCreateWorkItem">
+        <omgdi:waypoint x="85" y="197"></omgdi:waypoint>
+        <omgdi:waypoint x="160" y="197"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromCreateWorkItemToCheckEligibility" id="BPMNEdge_fromCreateWorkItemToCheckEligibility">
+        <omgdi:waypoint x="265" y="197"></omgdi:waypoint>
+        <omgdi:waypoint x="350" y="197"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromCheckEligibilityToHandleException" id="BPMNEdge_fromCheckEligibilityToHandleException">
+        <omgdi:waypoint x="370" y="177"></omgdi:waypoint>
+        <omgdi:waypoint x="370" y="87"></omgdi:waypoint>
+        <omgdi:waypoint x="480" y="87"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromCheckEligibilityToPreProcess" id="BPMNEdge_fromCheckEligibilityToPreProcess">
+        <omgdi:waypoint x="390" y="197"></omgdi:waypoint>
+        <omgdi:waypoint x="520" y="197"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromPreProcessToWorkItem" id="BPMNEdge_fromPreProcessToWorkItem">
+        <omgdi:waypoint x="560" y="197"></omgdi:waypoint>
+        <omgdi:waypoint x="640" y="197"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromPreProcessToMailStakeHolders" id="BPMNEdge_fromPreProcessToMailStakeHolders">
+        <omgdi:waypoint x="540" y="217"></omgdi:waypoint>
+        <omgdi:waypoint x="540" y="300"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromWorkItemToEnd" id="BPMNEdge_fromWorkItemToEnd">
+        <omgdi:waypoint x="745" y="197"></omgdi:waypoint>
+        <omgdi:waypoint x="890" y="197"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="fromHandleExceptionToEnd" id="BPMNEdge_fromHandleExceptionToEnd">
+        <omgdi:waypoint x="585" y="87"></omgdi:waypoint>
+        <omgdi:waypoint x="907" y="87"></omgdi:waypoint>
+        <omgdi:waypoint x="907" y="180"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14" width="100" x="10" y="0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
